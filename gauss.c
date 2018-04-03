@@ -69,6 +69,7 @@ void substituicao_r(double **M, double *raizes, int dim)
 {	int i, j = dim;
 	double b[dim], soma[dim], aux;
 	
+ 	
 	for(i=dim-1;i>=0;i--)
 	{	soma[i] = 0;
 	
@@ -85,23 +86,14 @@ int main(int argc, char **argv)
 {
 	double **M, **T, **Modulo, *raizes;
 	int i, j, a, dim;
-	FILE *leitura;
-    
-  	leitura = fopen("matriz.dat", "r");
-	i = fscanf(leitura,"%d",&dim);
 	
-	M = malloc(dim*sizeof(int *));
+	M = ler(argv[1],&dim);
+	imprime(M,dim);
+	
 	raizes = (double*)malloc(dim*sizeof(double));
 	
 	*raizes = 0;
 	
-	for(i=0;i<dim;i++)
-		M[i] = malloc((dim)*sizeof(int));
-	
-	fflush(stdin);
-	
-	M = ler(argv[1],&dim);
-	imprime(M,dim);
 	M = triang_sup(M,dim);
 	printf("\nMatriz escalonada:\n");
 	imprime(M,dim);
